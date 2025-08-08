@@ -22,7 +22,7 @@ $$r(\theta) = \frac{\pi_\theta(a_t|o_t)}{\pi_{\text{old}}(a_t|o_t)}.$$
 
 Its clipped surrogate is
 
-$$\max_\theta\; \mathbb{E}_{a_t \sim \pi_{\text{old}}}\; \big[\, \min\big( r(\theta)\, \hat A_t,\; \operatorname{clip}(r(\theta), 1-\varepsilon, 1+\varepsilon)\, \hat A_t \big)\,\big].$$
+$$\max_\theta\; \mathbb{E}_{a_t \sim \pi_{\text{old}}}\; \big[\, \min\big( r(\theta)\, \hat A_t,\; \mathrm{clip}(r(\theta), 1-\varepsilon, 1+\varepsilon)\, \hat A_t \big)\,\big].$$
 
 This requires computing (or at least evaluating) $\pi_\theta(a|o)$, which is easy for Gaussians but **hard for flow/diffusion models**.
 
@@ -75,7 +75,7 @@ Practical estimator (stored MC): we sample $(\tau, \varepsilon)$ once during rol
 ## FPO objective: PPO’s surrogate, new ratio
 FPO simply plugs the surrogate ratio into PPO’s clipped objective:
 
-$$ \max_\theta\; \mathbb{E}\; \big[\, \min\big( \hat r_{\text{FPO}}(\theta)\, \hat A_t,\; \operatorname{clip}(\hat r_{\text{FPO}}(\theta), 1-\varepsilon, 1+\varepsilon)\, \hat A_t \big)\,\big]. $$
+$$ \max_\theta\; \mathbb{E}\; \big[\, \min\big( \hat r_{\text{FPO}}(\theta)\, \hat A_t,\; \mathrm{clip}(\hat r_{\text{FPO}}(\theta), 1-\varepsilon, 1+\varepsilon)\, \hat A_t \big)\,\big]. $$
 
 Everything else—GAE, value learning, batching, clipping—follows PPO.
 
